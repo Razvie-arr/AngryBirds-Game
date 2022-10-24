@@ -6,9 +6,9 @@ public class Vector3D extends Vector2D
 
     public Vector3D(int dX, int dY, int dZ)
     {
-        this.axis.set(0, dX);
-        this.axis.set(1, dY);
-        this.axis.set(2, dZ);
+§§§        axis.add(dX);
+        axis.add(dY);
+        axis.add(dZ);
 
     }
 

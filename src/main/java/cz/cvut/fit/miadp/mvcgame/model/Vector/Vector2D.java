@@ -6,8 +6,8 @@ public class Vector2D implements IVector {
 
     public Vector2D(int dX, int dY)
     {
-        axis.set(0, dX);
-        axis.set(1, dY);
+        axis.add(dX);
+        axis.add(dY);
     }
 
     public void setDx(int dX) {
