@@ -1,53 +1,40 @@
 package cz.cvut.fit.miadp.mvcgame;
 
-import java.util.List;
-
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
-import cz.cvut.fit.miadp.mvcgame.model.Position;
-// in future, use Bridge to remove this dependency
+import cz.cvut.fit.miadp.mvcgame.controller.GameController;
+import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+import cz.cvut.fit.miadp.mvcgame.view.GameView;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+
+import java.util.List;
 
 public class MvcGame
 {
-    private Position logoPos;
+    private GameModel model;
+    private GameView view;
+    private GameController controller;
 
     public void init()
     {
-        logoPos = new Position( (int)((MvcGameConfig.MAX_X/2)-128), (int)((MvcGameConfig.MAX_Y/2)-128) );
+
+        this.model = new GameModel();
+        this.view = new GameView(this.model);
+        this.controller = this.view.getController();
     }
 
     public void processPressedKeys(List<String> pressedKeysCodes)
     {
-        for(String code : pressedKeysCodes)
-        {
-            switch(code){
-                case "UP":
-                    logoPos.setY(logoPos.getY() - 10);
-                    break;
-                case "DOWN":
-                    logoPos.setY(logoPos.getY() + 10);
-                    break;
-                case "LEFT":
-                    logoPos.setX(logoPos.getX() - 10);
-                    break;
-                case "RIGHT":
-                    logoPos.setX(logoPos.getX() + 10);
-                    break;
-                default: 
-                    //nothing
-            }
-        }
+        this.controller.processPressedKeys(pressedKeysCodes);
     }
 
     public void update()
     {
-        // nothing yet
+        this.model.update();
     }
 
     public void render(GraphicsContext gr)
     {
-        gr.drawImage(new Image("icons/fit-icon.png"), logoPos.getX(), logoPos.getY());
+        this.view.setGraphicContext(gr);
     }
 
     public String getWindowTitle()

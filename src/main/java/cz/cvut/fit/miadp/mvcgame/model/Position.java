@@ -32,4 +32,8 @@ public class Position
 	}
 
 
+    public void add(Vector vector) {
+		this.setX(this.getX() + vector.getDX());
+		this.setY(this.getY() + vector.getDY());
+    }
 }
