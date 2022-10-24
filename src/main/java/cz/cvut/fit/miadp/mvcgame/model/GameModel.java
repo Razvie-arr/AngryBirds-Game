@@ -1,6 +1,8 @@
 package cz.cvut.fit.miadp.mvcgame.model;
 
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.miadp.mvcgame.model.Position.Position;
+import cz.cvut.fit.miadp.mvcgame.model.Position.Position2D;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 
@@ -13,7 +15,7 @@ public class GameModel implements IObservable {
     private List<IObserver> observers;
 
     public GameModel() {
-        this.cannon = new Cannon(new Position(MvcGameConfig.CANNON_POSITION_X, MvcGameConfig.CANNON_POSITION_Y));
+        this.cannon = new Cannon(new Position2D(MvcGameConfig.CANNON_POSITION_X, MvcGameConfig.CANNON_POSITION_Y));
         this.observers = new ArrayList<>();
     }
 
