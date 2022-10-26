@@ -1,8 +1,8 @@
 package cz.cvut.fit.miadp.mvcgame.model.Position;
 
-import cz.cvut.fit.miadp.mvcgame.model.Vector.IVector;
+import cz.cvut.fit.miadp.mvcgame.model.Vector.Vector;
 
-public abstract class Position
+public abstract class Position<T extends Vector>
 {
 	private int dimX = 0;
 	private int dimY = 0;
@@ -23,5 +23,5 @@ public abstract class Position
 		this.dimX = x;
 	}
 
-	public abstract void add(IVector vector);
+	public abstract void add(T vector);
 }

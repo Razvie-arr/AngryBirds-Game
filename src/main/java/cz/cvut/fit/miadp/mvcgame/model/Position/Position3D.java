@@ -1,9 +1,8 @@
 package cz.cvut.fit.miadp.mvcgame.model.Position;
 
-import cz.cvut.fit.miadp.mvcgame.model.Vector.IVector;
 import cz.cvut.fit.miadp.mvcgame.model.Vector.Vector3D;
 
-public class Position3D extends Position
+public class Position3D extends Position<Vector3D>
 {
     private int dimZ = 0;
 
@@ -23,10 +22,10 @@ public class Position3D extends Position
 		this.dimZ = z;
 	}
 
-	public void add(IVector vector) {
-		Vector3D vector3D = (Vector3D) vector;
-		this.setX(this.getX() + vector3D.getDx());
-		this.setY(this.getY() + vector3D.getDy());
-		this.setZ(this.getZ() + vector3D.getDz());
+	@Override
+	public void add(Vector3D vector) {
+		this.setX(this.getX() + vector.getDx());
+		this.setY(this.getY() + vector.getDy());
+		this.setZ(this.getZ() + vector.getDz());
 	}
 }

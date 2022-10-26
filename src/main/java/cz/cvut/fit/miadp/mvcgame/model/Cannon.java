@@ -2,13 +2,13 @@ package cz.cvut.fit.miadp.mvcgame.model;
 
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.Position.Position;
-import cz.cvut.fit.miadp.mvcgame.model.Vector.IVector;
+import cz.cvut.fit.miadp.mvcgame.model.Position.Position2D;
 import cz.cvut.fit.miadp.mvcgame.model.Vector.Vector2D;
 
 public class Cannon extends GameObject {
 //    private double angle;
 //    private int power;
-    public Cannon(Position initPosition) {
+    public Cannon(Position2D initPosition) {
         this.position = initPosition;
     }
 
