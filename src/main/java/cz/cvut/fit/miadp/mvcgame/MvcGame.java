@@ -1,8 +1,12 @@
 package cz.cvut.fit.miadp.mvcgame;
 
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.miadp.mvcgame.controller.CannonController;
 import cz.cvut.fit.miadp.mvcgame.controller.GameController;
+import cz.cvut.fit.miadp.mvcgame.model.Cannon;
+import cz.cvut.fit.miadp.mvcgame.model.CannonModel;
 import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+import cz.cvut.fit.miadp.mvcgame.view.CannonView;
 import cz.cvut.fit.miadp.mvcgame.view.GameView;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -10,31 +14,30 @@ import java.util.List;
 
 public class MvcGame
 {
-    private GameModel model;
-    private GameView view;
-    private GameController controller;
+    private CannonModel cannonModel;
+    private CannonView cannonView;
+    private CannonController cannonController;
 
     public void init()
     {
-
-        this.model = new GameModel();
-        this.view = new GameView(this.model);
-        this.controller = this.view.getController();
+        this.cannonModel = new CannonModel();
+        this.cannonView = new CannonView(cannonModel);
+        this.cannonController = this.cannonView.getController();
     }
 
     public void processPressedKeys(List<String> pressedKeysCodes)
     {
-        this.controller.processPressedKeys(pressedKeysCodes);
+        this.cannonController.processPressedKeys(pressedKeysCodes);
     }
 
     public void update()
     {
-        this.model.update();
+        this.cannonModel.update();
     }
 
     public void render(GraphicsContext gr)
     {
-        this.view.setGraphicContext(gr);
+        this.cannonView.setGraphicContext(gr);
     }
 
     public String getWindowTitle()

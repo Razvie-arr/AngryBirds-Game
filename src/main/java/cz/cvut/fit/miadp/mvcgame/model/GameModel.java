@@ -6,37 +6,13 @@ import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
-public class GameModel implements IObservable {
-
-    private final Cannon cannon;
+public abstract class GameModel implements IObservable {
     private List<IObserver> observers;
 
     public GameModel() {
-        this.cannon = new Cannon(new Position(MvcGameConfig.CANNON_POSITION_X, MvcGameConfig.CANNON_POSITION_Y));
         this.observers = new ArrayList<>();
-    }
-
-    public Position getCannonPosition() { return this.cannon.getPosition(); }
-
-    public void moveCannonUp() {
-        this.cannon.moveUp();
-        this.notifyObserver();
-    }
-
-    public void moveCannonDown() {
-        this.cannon.moveDown();
-        this.notifyObserver();
-    }
-
-    public void moveCannonLeft() {
-        this.cannon.moveLeft();
-        this.notifyObserver();
-    }
-
-    public void moveCannonRight() {
-        this.cannon.moveRight();
-        this.notifyObserver();
     }
 
     public void update() {
@@ -60,9 +36,18 @@ public class GameModel implements IObservable {
     }
 
     @Override
-    public void notifyObserver() {
+    public void notifyObservers() {
         for (IObserver obs : observers) {
             obs.update();
+        }
+    }
+
+    @Override
+    public void notifyObserver(Class observerClass) {
+        for (IObserver obs : observers) {
+            if (obs.getClass() == observerClass) {
+                obs.update();
+            }
         }
     }
 }
