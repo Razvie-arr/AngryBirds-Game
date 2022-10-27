@@ -3,21 +3,23 @@ package cz.cvut.fit.miadp.mvcgame.view;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.controller.GameController;
 import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+import cz.cvut.fit.miadp.mvcgame.model.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
+import cz.cvut.fit.miadp.mvcgame.visitor.GameRenderer;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 public class GameView implements IObserver {
     private GameModel model;
     private GameController controller;
     private GraphicsContext gr;
+    private GameRenderer renderer;
 
     public GameView(GameModel model) {
         this.model = model;
         this.controller = new GameController(this.model);
         this.gr = null;
-
         this.model.registerObserver(this);
+        this.renderer = new GameRenderer();
     }
 
     public GameController getController() {
@@ -27,14 +29,14 @@ public class GameView implements IObserver {
     public void render()
     {
         this.gr.clearRect(0, 0, MvcGameConfig.MAX_Y, MvcGameConfig.MAX_Y);
-        this.drawCannon();
+        for (GameObject go : model.getGameObjects()) {
+            go.acceptVisitor(this.renderer);
+        }
     }
 
-    private void drawCannon() {
-        gr.drawImage(new Image("images/cannon.png"), model.getCannonPosition().getX(), model.getCannonPosition().getY());
-    }
 
     public void setGraphicContext(GraphicsContext gr) {
+        this.renderer.setGraphicContext(gr);
         this.gr = gr;
         this.update();
     }
