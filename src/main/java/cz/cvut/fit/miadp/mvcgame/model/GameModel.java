@@ -4,15 +4,13 @@ import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observer;
+import java.util.*;
 
 public abstract class GameModel implements IObservable {
-    private List<IObserver> observers;
+    private EnumMap<Aspect, Set<IObserver>> observers;
 
     public GameModel() {
-        this.observers = new ArrayList<>();
+        this.observers = new EnumMap<>(Aspect.class);
     }
 
     public void update() {
@@ -22,31 +20,30 @@ public abstract class GameModel implements IObservable {
     }
 
     @Override
-    public void registerObserver(IObserver obs) {
-        if (!this.observers.contains(obs)) {
-            this.observers.add(obs);
+    public void registerObserver(IObserver obs, Aspect interest) {
+        if (observers.containsKey(interest)) {
+            Set<IObserver> observersWithInterest = observers.get(interest);
+            observersWithInterest.add(obs);
+        } else {
+            Set<IObserver> newObserversWithInterest = new HashSet<>();
+            newObserversWithInterest.add(obs);
+            observers.put(interest, newObserversWithInterest);
         }
     }
 
     @Override
-    public void unregisterObserver(IObserver obs) {
-        if (this.observers.contains(obs)) {
-            observers.remove(obs);
+    public void unregisterObserver(IObserver obs, Aspect interest) {
+        if (observers.containsKey(interest)) {
+            Set<IObserver> observersWithInterest = observers.get(interest);
+            observersWithInterest.remove(obs);
         }
     }
 
     @Override
-    public void notifyObservers() {
-        for (IObserver obs : observers) {
-            obs.update();
-        }
-    }
-
-    @Override
-    public void notifyObserver(Class observerClass) {
-        for (IObserver obs : observers) {
-            if (obs.getClass() == observerClass) {
-                obs.update();
+    public void notifyObservers(Aspect interest) {
+        if (observers.containsKey(interest)) {
+            for (IObserver obs : observers.get(interest)) {
+                obs.update(this, interest);
             }
         }
     }

@@ -2,10 +2,10 @@ package cz.cvut.fit.miadp.mvcgame.view;
 
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.controller.GameController;
-import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+import cz.cvut.fit.miadp.mvcgame.model.Aspect;
+import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 public abstract class GameView implements IObserver {
 
@@ -28,11 +28,12 @@ public abstract class GameView implements IObserver {
 
     public void setGraphicContext(GraphicsContext gr) {
         this.gr = gr;
-        this.update();
+        this.render();
     }
 
     @Override
-    public void update() {
+    public void update(IObservable obs, Aspect interest) {
+        //does same thing for cannon_up, cannon_down and shoot, but can be modified
         this.render();
     }
 }

@@ -18,22 +18,22 @@ public class CannonModel extends GameModel {
 
     public void moveCannonUp() {
         this.cannon.moveUp();
-        this.notifyObserver(CannonView.class);
+        this.notifyObservers(Aspect.CANNON_UP);
     }
 
     public void moveCannonDown() {
         this.cannon.moveDown();
-        this.notifyObserver(CannonView.class);
+        this.notifyObservers(Aspect.CANNON_DOWN);
     }
 
     public void moveCannonLeft() {
         this.cannon.moveLeft();
-        this.notifyObserver(CannonView.class);
+        this.notifyObservers(Aspect.CANNON_LEFT);
     }
 
     public void moveCannonRight() {
         this.cannon.moveRight();
-        this.notifyObserver(CannonView.class);
+        this.notifyObservers(Aspect.CANNON_RIGHT);
     }
 
 }
