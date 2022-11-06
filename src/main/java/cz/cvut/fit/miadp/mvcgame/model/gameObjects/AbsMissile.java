@@ -1,4 +1,4 @@
-package cz.cvut.fit.miadp.mvcgame.model;
+package cz.cvut.fit.miadp.mvcgame.model.gameObjects;
 
 import cz.cvut.fit.miadp.mvcgame.visitor.IVisitor;
 

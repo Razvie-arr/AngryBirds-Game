@@ -1,7 +1,7 @@
 package cz.cvut.fit.miadp.mvcgame.visitor;
 
-import cz.cvut.fit.miadp.mvcgame.model.AbsCannon;
-import cz.cvut.fit.miadp.mvcgame.model.AbsMissile;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

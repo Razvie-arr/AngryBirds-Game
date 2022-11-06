@@ -3,7 +3,7 @@ package cz.cvut.fit.miadp.mvcgame.view;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.controller.GameController;
 import cz.cvut.fit.miadp.mvcgame.model.GameModel;
-import cz.cvut.fit.miadp.mvcgame.model.GameObject;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.visitor.GameRenderer;
 import javafx.scene.canvas.GraphicsContext;
@@ -36,8 +36,8 @@ public class GameView implements IObserver {
 
 
     public void setGraphicContext(GraphicsContext gr) {
-        this.renderer.setGraphicContext(gr);
         this.gr = gr;
+        this.renderer.setGraphicContext(gr);
         this.update();
     }
 

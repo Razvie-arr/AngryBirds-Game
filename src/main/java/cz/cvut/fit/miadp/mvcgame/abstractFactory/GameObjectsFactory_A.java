@@ -1,6 +1,11 @@
-package cz.cvut.fit.miadp.mvcgame.config;
+package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 
+import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.*;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.Cannon_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.Missile_A;
 
 public class GameObjectsFactory_A implements IGameObjectFactory{
     @Override
