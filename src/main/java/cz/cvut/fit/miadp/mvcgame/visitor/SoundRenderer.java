@@ -1,16 +1,15 @@
 package cz.cvut.fit.miadp.mvcgame.visitor;
-
+import cz.cvut.fit.miadp.mvcgame.SoundPlayer;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import java.io.IOException;
 
-public class GameRenderer implements IVisitor {
-
+public class SoundRenderer implements IVisitor {
     private GraphicsContext gr;
-
-    public GameRenderer() {
-    }
+    private final SoundPlayer missileSound = new SoundPlayer("missile");
+    private final SoundPlayer cannonSound = new SoundPlayer("cannon");
 
     public void setGraphicContext(GraphicsContext gr) {
         this.gr = gr;
@@ -18,12 +17,11 @@ public class GameRenderer implements IVisitor {
 
     @Override
     public void visitCannon(AbsCannon cannon) {
-        gr.drawImage(new Image("images/cannon.png"), cannon.getPosition().getX(), cannon.getPosition().getY());
+        cannonSound.playSound();
     }
 
     @Override
     public void visitMissile(AbsMissile missile) {
-        gr.drawImage(new Image("images/missile.png"), missile.getPosition().getX(), missile.getPosition().getY());
-
+        missileSound.playSound();
     }
 }
