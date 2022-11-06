@@ -1,6 +1,7 @@
 package cz.cvut.fit.miadp.mvcgame.model;
 
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjectsFactory_A;
+import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjectsFactory_B;
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
@@ -22,7 +23,7 @@ public class GameModel implements IObservable {
 
     public GameModel() {
         this.observers = new ArrayList<>();
-        this.goFact = new GameObjectsFactory_A();
+        this.goFact = new GameObjectsFactory_B();
         this.cannon = this.goFact.createCannon();
         this.missiles = new ArrayList<>();
     }

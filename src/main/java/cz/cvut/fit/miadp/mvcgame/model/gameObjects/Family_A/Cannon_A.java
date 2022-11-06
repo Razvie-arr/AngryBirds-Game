@@ -1,9 +1,11 @@
-package cz.cvut.fit.miadp.mvcgame.model.gameObjects;
+package cz.cvut.fit.miadp.mvcgame.model.gameObjects.Family_A;
 
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.Vector;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 
 public class Cannon_A extends AbsCannon {
 
