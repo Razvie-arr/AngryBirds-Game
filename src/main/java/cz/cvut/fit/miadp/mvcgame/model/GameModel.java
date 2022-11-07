@@ -8,6 +8,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
+import cz.cvut.fit.miadp.mvcgame.visitor.SoundRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +19,14 @@ public class GameModel implements IObservable {
     private List<AbsMissile> missiles;
     private List<IObserver> observers;
     private IGameObjectFactory goFact;
-
+    private SoundRenderer soundRenderer;
 
     public GameModel() {
         this.observers = new ArrayList<>();
         this.goFact = new GameObjectsFactory_A();
         this.cannon = this.goFact.createCannon();
         this.missiles = new ArrayList<>();
+        this.soundRenderer = new SoundRenderer();
     }
 
     public void update() {
@@ -52,11 +54,13 @@ public class GameModel implements IObservable {
     public Position getCannonPosition() { return this.cannon.getPosition(); }
 
     public void moveCannonUp() {
+        this.cannon.acceptVisitor(soundRenderer);
         this.cannon.moveUp();
         this.notifyObservers();
     }
 
     public void moveCannonDown() {
+        this.cannon.acceptVisitor(soundRenderer);
         this.cannon.moveDown();
         this.notifyObservers();
     }
@@ -85,6 +89,7 @@ public class GameModel implements IObservable {
 
     public void cannonShoot() {
         this.missiles.add(this.cannon.shoot());
+        this.getMissiles().forEach(missile -> missile.acceptVisitor(soundRenderer));
         this.notifyObservers();
     }
 

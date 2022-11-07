@@ -6,21 +6,20 @@ import cz.cvut.fit.miadp.mvcgame.model.GameModel;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.visitor.GameRenderer;
-import cz.cvut.fit.miadp.mvcgame.visitor.SoundRenderer;
 import javafx.scene.canvas.GraphicsContext;
 
 public class GameView implements IObserver {
     private GameModel model;
     private GameController controller;
     private GraphicsContext gr;
-    private SoundRenderer renderer;
+    private GameRenderer renderer;
 
     public GameView(GameModel model) {
         this.model = model;
         this.controller = new GameController(this.model);
         this.gr = null;
         this.model.registerObserver(this);
-        this.renderer = new SoundRenderer();
+        this.renderer = new GameRenderer();
     }
 
     public GameController getController() {

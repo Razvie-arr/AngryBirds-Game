@@ -1,11 +1,8 @@
 package cz.cvut.fit.miadp.mvcgame;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.net.URL;
 
 public class SoundPlayer {
