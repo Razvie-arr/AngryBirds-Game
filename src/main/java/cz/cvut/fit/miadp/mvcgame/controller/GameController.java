@@ -1,31 +1,55 @@
 package cz.cvut.fit.miadp.mvcgame.controller;
 
-import cz.cvut.fit.miadp.mvcgame.model.GameModel;
-
 import java.util.List;
 
+import cz.cvut.fit.miadp.mvcgame.memento.CareTaker;
+import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+
 public class GameController {
+
     private GameModel model;
 
-    public GameController(GameModel model) {
+    public GameController( GameModel model ) {
         this.model = model;
     }
 
-    public void processPressedKeys(List<String> pressedKeysCodes)
-    {
-        for(String code : pressedKeysCodes)
-        {
-            switch(code) {
+    public void processPressedKeys( List<String> pressedKeysCodes ) {
+        for( String code : pressedKeysCodes ) {
+            switch( code ) {
                 case "UP":
-                    model.moveCannonUp();
+                    this.model.moveCannonUp( );
                     break;
                 case "DOWN":
-                    model.moveCannonDown();
+                    this.model.moveCannonDown( );
                     break;
                 case "SPACE":
-                    this.model.cannonShoot();
+                    this.model.cannonShoot( );
                     break;
-                default:
+                case "A":
+                    this.model.aimCannonUp( );
+                    break;
+                case "Y":
+                    this.model.aimCannonDown( );
+                    break;
+                case "F":
+                    this.model.cannonPowerUp( );
+                    break;
+                case "D":
+                    this.model.cannonPowerDown( );
+                    break;
+                case "M":
+                    this.model.toggleMovingStrategy( );
+                    break;
+                case "N":
+                    this.model.toggleShootingMode();
+                    break;
+                case "S":
+                    CareTaker.getInstance( ).createMemento( );
+                    break;
+                case "R":
+                    CareTaker.getInstance( ).setMemento( );
+                    break;   
+                default: 
                     //nothing
             }
         }

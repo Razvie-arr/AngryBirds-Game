@@ -4,8 +4,10 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 
 public interface IVisitor {
-    void visitCannon(AbsCannon cannon);
-    void visitMissile(AbsMissile missile);
 
-    //TODO: enemies, gameinfo, collisions...
+    public void visitCannon( AbsCannon cannon );
+    public void visitMissile( AbsMissile missile );
+    
+    //TODO public void visitEnemy( ... );
+    
 }

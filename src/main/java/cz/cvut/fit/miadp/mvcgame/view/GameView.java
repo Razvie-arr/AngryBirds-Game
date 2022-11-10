@@ -9,40 +9,40 @@ import cz.cvut.fit.miadp.mvcgame.visitor.GameRenderer;
 import javafx.scene.canvas.GraphicsContext;
 
 public class GameView implements IObserver {
-    private GameModel model;
+
     private GameController controller;
+    private GameModel model ;
     private GraphicsContext gr;
     private GameRenderer renderer;
 
-    public GameView(GameModel model) {
+    public GameView( GameModel model ){
         this.model = model;
-        this.controller = new GameController(this.model);
+        this.controller = new GameController( model );
         this.gr = null;
-        this.model.registerObserver(this);
-        this.renderer = new GameRenderer();
+        this.model.registerObserver( this );
+        this.renderer = new GameRenderer( );
     }
 
-    public GameController getController() {
+    public GameController getController( ) {
         return this.controller;
     }
 
-    public void render()
-    {
-        this.gr.clearRect(0, 0, MvcGameConfig.MAX_Y, MvcGameConfig.MAX_Y);
-        for (GameObject go : model.getGameObjects()) {
-            go.acceptVisitor(this.renderer);
+    public void render( ) {
+        this.gr.clearRect( 0, 0, MvcGameConfig.MAX_X, MvcGameConfig.MAX_Y );
+        for ( GameObject go : this.model.getGameObjects( ) ) {
+            go.acceptVisitor( this.renderer );
         }
     }
 
-
-    public void setGraphicContext(GraphicsContext gr) {
+    public void setGraphicContext( GraphicsContext gr ) {
         this.gr = gr;
-        this.renderer.setGraphicContext(gr);
-        this.update();
+        this.renderer.setGraphicContext( gr );
+        this.update( );
     }
 
     @Override
-    public void update() {
-        this.render();
+    public void update( ) {
+        this.render( );
     }
+
 }
