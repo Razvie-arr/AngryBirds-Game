@@ -14,6 +14,7 @@ import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.RealisticMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
+import cz.cvut.fit.miadp.mvcgame.strategy.UltraSpeedMovingStrategy;
 
 public class GameModel implements IObservable {
 
@@ -138,10 +139,10 @@ public class GameModel implements IObservable {
             this.movingStrategy = new RealisticMovingStrategy( );
         }
         else if ( this.movingStrategy instanceof RealisticMovingStrategy ){
-            this.movingStrategy = new SimpleMovingStrategy( );
+            this.movingStrategy = new UltraSpeedMovingStrategy( );
         }
         else {
-
+            this.movingStrategy = new SimpleMovingStrategy();
         }
     }
 
