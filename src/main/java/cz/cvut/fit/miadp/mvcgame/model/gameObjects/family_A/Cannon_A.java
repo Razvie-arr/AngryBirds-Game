@@ -10,6 +10,8 @@ import cz.cvut.fit.miadp.mvcgame.model.Vector;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 
+import static cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig.INIT_ANGLE;
+
 public class Cannon_A extends AbsCannon {
 
     private IGameObjectFactory goFact;
@@ -22,9 +24,10 @@ public class Cannon_A extends AbsCannon {
         this.position = initialPosition;
         this.goFact = goFact;
         this.power = MvcGameConfig.INIT_POWER;
-        this.angle = MvcGameConfig.INIT_ANGLE;
+        this.angle = INIT_ANGLE;
         this.shootingMode = AbsCannon.SINGLE_SHOOTING_MODE;
         this.shootingBatch = new ArrayList<AbsMissile>();
+        this.missileCounter = 0;
     }
 
     public void moveUp( ) {
@@ -73,6 +76,18 @@ public class Cannon_A extends AbsCannon {
                 this.power
             )
         );        
+    }
+
+    @Override
+    public void incrementMissileCounter() {
+        if (this.shootingMode == DYNAMIC_SHOOTING_MODE) {
+            this.missileCounter++;
+        }
+    }
+
+    @Override
+    public void backToInitialAngle( ) {
+        this.angle = INIT_ANGLE;
     }
 
 }

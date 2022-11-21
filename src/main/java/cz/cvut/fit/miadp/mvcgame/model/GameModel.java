@@ -22,6 +22,7 @@ public class GameModel implements IObservable {
     private List<IObserver> observers;
     private IGameObjectFactory goFact;
     private IMovingStrategy movingStrategy;
+    private int missileCounter;
 
     private int score;
 
@@ -31,7 +32,8 @@ public class GameModel implements IObservable {
         this.cannon = this.goFact.createCannon( );   
         this.missiles = new ArrayList<AbsMissile>();
         this.movingStrategy = new SimpleMovingStrategy( );   
-        this.score = 0; 
+        this.score = 0;
+        this.missileCounter = 0;
     }
 
     public void update( ) {
@@ -145,6 +147,10 @@ public class GameModel implements IObservable {
 
     public void toggleShootingMode( ){
         this.cannon.toggleShootingMode( );
+    }
+
+    public void incrementMissileCounter() {
+        this.cannon.incrementMissileCounter();
     }
 
     private class Memento {
