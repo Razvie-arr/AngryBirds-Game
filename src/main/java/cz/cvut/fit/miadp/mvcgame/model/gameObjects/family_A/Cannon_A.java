@@ -86,6 +86,13 @@ public class Cannon_A extends AbsCannon {
     }
 
     @Override
+    public void decrementMissileCounter() {
+        if (this.shootingMode == DYNAMIC_SHOOTING_MODE && this.missileCounter > 0) {
+            this.missileCounter--;
+        }
+    }
+
+    @Override
     public void backToInitialAngle( ) {
         this.angle = INIT_ANGLE;
     }

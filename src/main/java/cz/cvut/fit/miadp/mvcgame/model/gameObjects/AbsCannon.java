@@ -35,6 +35,8 @@ public abstract class AbsCannon extends GameObject {
 
     abstract public void incrementMissileCounter();
 
+    abstract public void decrementMissileCounter();
+
     public int getMissileCounter() { return missileCounter; }
 
     public void toggleShootingMode( ) {

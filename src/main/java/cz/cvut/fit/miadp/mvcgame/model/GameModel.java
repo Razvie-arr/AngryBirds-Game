@@ -154,6 +154,10 @@ public class GameModel implements IObservable {
         this.cannon.incrementMissileCounter();
     }
 
+    public void decrementMissileCounter() {
+        this.cannon.decrementMissileCounter();
+    }
+
     private class Memento {
         private int score;
         // GO positions
