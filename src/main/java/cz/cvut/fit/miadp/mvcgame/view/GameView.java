@@ -7,6 +7,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.visitor.GameRenderer;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 public class GameView implements IObserver {
 
@@ -32,11 +33,13 @@ public class GameView implements IObserver {
         for ( GameObject go : this.model.getGameObjects( ) ) {
             go.acceptVisitor( this.renderer );
         }
+        this.gr.drawImage( new Image( "images/black_hole.png"), 520, -20);
     }
 
     public void setGraphicContext( GraphicsContext gr ) {
         this.gr = gr;
         this.renderer.setGraphicContext( gr );
+
         this.update( );
     }
 

@@ -11,10 +11,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
-import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
-import cz.cvut.fit.miadp.mvcgame.strategy.RealisticMovingStrategy;
-import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
-import cz.cvut.fit.miadp.mvcgame.strategy.UltraSpeedMovingStrategy;
+import cz.cvut.fit.miadp.mvcgame.strategy.*;
 
 public class GameModel implements IObservable {
 
@@ -140,6 +137,9 @@ public class GameModel implements IObservable {
         }
         else if ( this.movingStrategy instanceof RealisticMovingStrategy ){
             this.movingStrategy = new UltraSpeedMovingStrategy( );
+        }
+        else if (this.movingStrategy instanceof UltraSpeedMovingStrategy ) {
+            this.movingStrategy = new MagnetToBlackHoleMovingStrategy();
         }
         else {
             this.movingStrategy = new SimpleMovingStrategy();
