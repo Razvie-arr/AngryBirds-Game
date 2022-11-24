@@ -2,9 +2,13 @@ package cz.cvut.fit.miadp.mvcgame.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjectFactory_A;
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectFactory;
+import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
@@ -15,7 +19,7 @@ import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.RealisticMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
 
-public class GameModel implements IObservable {
+public class GameModel implements IGameModel {
 
     private AbsCannon cannon;
     private List<AbsMissile> missiles;
@@ -25,17 +29,31 @@ public class GameModel implements IObservable {
 
     private int score;
 
+    private Queue<AbstractGameCommand> unexecutedCmds;
+    private Stack<AbstractGameCommand> executedCmds;
+
     public GameModel( ) {
         this.observers = new ArrayList<IObserver>( );
         this.goFact = new GameObjectFactory_A( this );
         this.cannon = this.goFact.createCannon( );   
         this.missiles = new ArrayList<AbsMissile>();
         this.movingStrategy = new SimpleMovingStrategy( );   
-        this.score = 0; 
+        this.score = 0;
+        this.unexecutedCmds = new LinkedBlockingDeque<>();
+        this.executedCmds = new Stack<>();
     }
 
     public void update( ) {
+        this.executedCmds();
         this.moveMissiles( );
+    }
+
+    private void executedCmds() {
+        while (!this.unexecutedCmds.isEmpty()) {
+            AbstractGameCommand cmd = this.unexecutedCmds.poll();
+            cmd.doExecute();
+            this.executedCmds.push(cmd);
+        }
     }
 
     private void moveMissiles( ) {
@@ -149,18 +167,39 @@ public class GameModel implements IObservable {
 
     private class Memento {
         private int score;
+        private int cannonX;
+        private int cannonY;
+
         // GO positions
     }
 
     public Object createMemento( ) {
         Memento m = new Memento( );
         m.score = this.score;
+        m.cannonX = this.getCannonPosition().getX();
+        m.cannonY = this.getCannonPosition().getY();
         return m;
     }
 
     public void setMemento( Object memento ) {
         Memento m = ( Memento ) memento;
         this.score = m.score;
+        this.cannon.getPosition().setX(m.cannonX);
+        this.cannon.getPosition().setY(m.cannonY);
+    }
+
+    @Override
+    public void registerCommand(AbstractGameCommand cmd) {
+        unexecutedCmds.add(cmd);
+    }
+
+    @Override
+    public void undoLastCommand() {
+        if (!this.executedCmds.isEmpty()) {
+            AbstractGameCommand cmd = this.executedCmds.pop();
+            cmd.unExecute();
+        }
+        this.notifyObservers();
     }
 
 }

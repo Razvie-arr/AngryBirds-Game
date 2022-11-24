@@ -67,7 +67,7 @@ public class Cannon_A extends AbsCannon {
     @Override
     public void primitiveShoot() {
         this.shootingBatch.add( 
-            this.goFact.createMissile( 
+            this.goFact.createMissile(
                 new Position( this.getPosition( ).getX( ), this.getPosition( ).getY( ) ),
                 this.angle,
                 this.power

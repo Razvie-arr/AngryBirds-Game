@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
 public class CareTaker {
 
-    private GameModel model;
+    private IGameModel model;
     private List<Object> mementos = new ArrayList<Object>();
 
     private static class SingletonHolder {
@@ -18,7 +19,7 @@ public class CareTaker {
         return SingletonHolder.INSTANCE;
     }
 
-    public void setModel( GameModel model ){
+    public void setModel( IGameModel model ){
         this.model = model;
     }
 

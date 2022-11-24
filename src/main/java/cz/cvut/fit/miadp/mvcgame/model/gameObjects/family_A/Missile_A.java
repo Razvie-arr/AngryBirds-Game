@@ -10,7 +10,7 @@ public class Missile_A extends AbsMissile {
 
     public Missile_A( Position initialPosition, double initAngle, int initVelocity, IMovingStrategy movingStrategy ){
         super( initialPosition, initAngle, initVelocity);
-        this.position = initialPosition;
+        this.position = new Position(initialPosition.getX(), initialPosition.getY());
         this.movingStrategy = movingStrategy;
     }
 
