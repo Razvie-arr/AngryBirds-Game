@@ -17,7 +17,7 @@ import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
 
 import static org.mockito.Mockito.mock;
 
-public class EducativeTestCaseMock {
+public class TestCaseMock {
     @Test
     public void createMissile( ){
         IGameModel model = mock( GameModel.class );
