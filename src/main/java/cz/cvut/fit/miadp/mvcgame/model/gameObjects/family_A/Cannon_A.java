@@ -9,6 +9,7 @@ import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.Vector;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 
 public class Cannon_A extends AbsCannon {
 
@@ -33,6 +34,16 @@ public class Cannon_A extends AbsCannon {
 
     public void moveDown( ) {
         this.move( new Vector( 0, MvcGameConfig.MOVE_STEP ) );
+    }
+
+    @Override
+    public double getAngle() {
+        return angle;
+    }
+
+    @Override
+    public void setAngle(double angle) {
+        this.angle = angle;
     }
 
     @Override
@@ -75,4 +86,13 @@ public class Cannon_A extends AbsCannon {
         );        
     }
 
+    @Override
+    public IShootingMode getShootingMode() {
+        return shootingMode;
+    }
+
+    @Override
+    public void setShootingMode(IShootingMode shootingMode) {
+        this.shootingMode = shootingMode;
+    }
 }

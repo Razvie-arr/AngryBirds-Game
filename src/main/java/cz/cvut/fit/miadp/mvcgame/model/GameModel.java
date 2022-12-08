@@ -15,6 +15,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
+import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.RealisticMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
@@ -76,6 +77,10 @@ public class GameModel implements IGameModel {
 
     public Position getCannonPosition( ) {
         return this.cannon.getPosition( );
+    }
+
+    public double getCannonAimAngle() {
+        return this.cannon.getAngle();
     }
 
     public void moveCannonUp( ) {
@@ -149,6 +154,10 @@ public class GameModel implements IGameModel {
         return this.movingStrategy;
     }
 
+    private void setMovingStrategy(IMovingStrategy movingStrategy) {
+        this.movingStrategy = movingStrategy;
+    }
+
     public void toggleMovingStrategy( ) {
         if ( this.movingStrategy instanceof SimpleMovingStrategy ) {
             this.movingStrategy = new RealisticMovingStrategy( );
@@ -156,11 +165,11 @@ public class GameModel implements IGameModel {
         else if ( this.movingStrategy instanceof RealisticMovingStrategy ){
             this.movingStrategy = new SimpleMovingStrategy( );
         }
-        else {
-
-        }
     }
 
+    private IShootingMode getShootingMode() { return this.cannon.getShootingMode(); }
+
+    private void setShootingMode(IShootingMode shootingMode) { this.cannon.setShootingMode(shootingMode); }
     public void toggleShootingMode( ){
         this.cannon.toggleShootingMode( );
     }
@@ -169,7 +178,9 @@ public class GameModel implements IGameModel {
         private int score;
         private int cannonX;
         private int cannonY;
-
+        private double angle;
+        private IMovingStrategy movingStrategy;
+        private IShootingMode shootingMode;
         // GO positions
     }
 
@@ -178,6 +189,9 @@ public class GameModel implements IGameModel {
         m.score = this.score;
         m.cannonX = this.getCannonPosition().getX();
         m.cannonY = this.getCannonPosition().getY();
+        m.angle = this.getCannonAimAngle();
+        m.movingStrategy = this.getMovingStrategy();
+        m.shootingMode = this.getShootingMode();
         return m;
     }
 
@@ -186,6 +200,9 @@ public class GameModel implements IGameModel {
         this.score = m.score;
         this.cannon.getPosition().setX(m.cannonX);
         this.cannon.getPosition().setY(m.cannonY);
+        this.cannon.setAngle(m.angle);
+        this.setMovingStrategy(m.movingStrategy);
+        this.setShootingMode(m.shootingMode);
     }
 
     @Override

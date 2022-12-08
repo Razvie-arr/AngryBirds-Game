@@ -2,10 +2,7 @@ package cz.cvut.fit.miadp.mvcgame.controller;
 
 import java.util.List;
 
-import cz.cvut.fit.miadp.mvcgame.command.MoveCannonDownCmd;
-import cz.cvut.fit.miadp.mvcgame.command.MoveCannonUpCmd;
-import cz.cvut.fit.miadp.mvcgame.memento.CareTaker;
-import cz.cvut.fit.miadp.mvcgame.model.GameModel;
+import cz.cvut.fit.miadp.mvcgame.command.*;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 
 public class GameController {
@@ -20,7 +17,6 @@ public class GameController {
         for( String code : pressedKeysCodes ) {
             switch( code ) {
                 case "UP":
-//                    this.model.moveCannonUp( );
                     this.model.registerCommand(new MoveCannonUpCmd(this.model));
                     break;
                 case "DOWN":
@@ -33,22 +29,22 @@ public class GameController {
 
                 //TODO: tady udelat command pro vsechno krome "B"
                 case "A":
-                    this.model.aimCannonUp( );
+                    this.model.registerCommand(new AimCannonUpCmd(this.model));
                     break;
                 case "Y":
-                    this.model.aimCannonDown( );
+                    this.model.registerCommand(new AimCannonDownCmd(this.model));
                     break;
                 case "F":
-                    this.model.cannonPowerUp( );
+                    this.model.registerCommand(new CannonPowerUpCmd(this.model));
                     break;
                 case "D":
-                    this.model.cannonPowerDown( );
+                    this.model.registerCommand(new CannonPowerDownCmd(this.model));
                     break;
                 case "M":
-                    this.model.toggleMovingStrategy( );
+                    this.model.registerCommand(new ToggleMovingStrategyCmd(this.model));
                     break;
                 case "N":
-                    this.model.toggleShootingMode();
+                    this.model.registerCommand(new ToggleShootingModeCmd(this.model));
                     break;
                 case "B":
                     this.model.undoLastCommand();
