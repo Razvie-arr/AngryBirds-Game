@@ -27,7 +27,6 @@ public class GameController {
                     this.model.cannonShoot( );
                     break;
 
-                //TODO: tady udelat command pro vsechno krome "B"
                 case "A":
                     this.model.registerCommand(new AimCannonUpCmd(this.model));
                     break;

@@ -11,6 +11,7 @@ import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsGameInfo;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
@@ -27,6 +28,7 @@ public class GameModel implements IGameModel {
     private List<IObserver> observers;
     private IGameObjectFactory goFact;
     private IMovingStrategy movingStrategy;
+    private AbsGameInfo gameInfo;
 
     private int score;
 
@@ -36,7 +38,8 @@ public class GameModel implements IGameModel {
     public GameModel( ) {
         this.observers = new ArrayList<IObserver>( );
         this.goFact = new GameObjectFactory_A( this );
-        this.cannon = this.goFact.createCannon( );   
+        this.cannon = this.goFact.createCannon( );
+        this.gameInfo = this.goFact.createGameInfo();
         this.missiles = new ArrayList<AbsMissile>();
         this.movingStrategy = new SimpleMovingStrategy( );   
         this.score = 0;
@@ -79,8 +82,14 @@ public class GameModel implements IGameModel {
         return this.cannon.getPosition( );
     }
 
+    @Override
     public double getCannonAimAngle() {
         return this.cannon.getAngle();
+    }
+
+    @Override
+    public int getCannonPower() {
+        return this.cannon.getPower();
     }
 
     public void moveCannonUp( ) {
@@ -146,6 +155,7 @@ public class GameModel implements IGameModel {
     public List<GameObject> getGameObjects( ) {
         List<GameObject> go = new ArrayList<GameObject>();
         go.add( this.cannon );
+        go.add(this.gameInfo);
         go.addAll( this.missiles );
         return go;
     }
@@ -167,12 +177,19 @@ public class GameModel implements IGameModel {
         }
     }
 
-    private IShootingMode getShootingMode() { return this.cannon.getShootingMode(); }
+    @Override
+    public IShootingMode getShootingMode() { return this.cannon.getShootingMode(); }
 
     private void setShootingMode(IShootingMode shootingMode) { this.cannon.setShootingMode(shootingMode); }
+
     public void toggleShootingMode( ){
         this.cannon.toggleShootingMode( );
     }
+
+    public Position getGameInfoPosition() {
+        return this.gameInfo.getPosition();
+    }
+
 
     private class Memento {
         private int score;

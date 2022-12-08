@@ -4,7 +4,9 @@ import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.GameModel;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsGameInfo;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Cannon_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.GameInfo_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Missile_A;
 
 public class GameObjectFactory_A implements IGameObjectFactory {
@@ -24,5 +26,11 @@ public class GameObjectFactory_A implements IGameObjectFactory {
     public Missile_A createMissile( Position cannonPosition, double initAngle, int initVelocity ) {
         return new Missile_A(model.getCannonPosition(), initAngle, initVelocity, this.model.getMovingStrategy( ) );
     }
-    
+
+    @Override
+    public GameInfo_A createGameInfo() {
+        return new GameInfo_A(new Position(MvcGameConfig.GAMEINFO_POS_X, MvcGameConfig.GAMEINFO_POS_Y), model);
+    }
+
+
 }

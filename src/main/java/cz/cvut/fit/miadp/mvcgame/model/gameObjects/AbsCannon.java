@@ -20,6 +20,7 @@ public abstract class AbsCannon extends GameObject {
     public abstract void powerUp( );
     public abstract void powerDown( );
     public abstract double getAngle();
+    public abstract int getPower();
     public abstract void setAngle(double angle);
     public abstract IShootingMode getShootingMode();
     public abstract void setShootingMode(IShootingMode mode);

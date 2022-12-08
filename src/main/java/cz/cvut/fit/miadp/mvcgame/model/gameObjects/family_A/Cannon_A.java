@@ -76,6 +76,11 @@ public class Cannon_A extends AbsCannon {
     }
 
     @Override
+    public int getPower() {
+        return this.power;
+    }
+
+    @Override
     public void primitiveShoot() {
         this.shootingBatch.add( 
             this.goFact.createMissile(

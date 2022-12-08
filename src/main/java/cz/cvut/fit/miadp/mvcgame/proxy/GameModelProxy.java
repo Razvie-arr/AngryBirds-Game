@@ -6,6 +6,7 @@ import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
+import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 
 import java.util.List;
@@ -42,6 +43,16 @@ public class GameModelProxy implements IGameModel {
     @Override
     public Position getCannonPosition( ) {
         return this.subject.getCannonPosition( );
+    }
+
+    @Override
+    public double getCannonAimAngle() {
+        return this.subject.getCannonAimAngle();
+    }
+
+    @Override
+    public int getCannonPower() {
+        return this.subject.getCannonPower();
     }
 
     @Override
@@ -95,6 +106,11 @@ public class GameModelProxy implements IGameModel {
     }
 
     @Override
+    public IShootingMode getShootingMode() {
+        return this.subject.getShootingMode();
+    }
+
+    @Override
     public void toggleMovingStrategy( ) {
         this.subject.toggleMovingStrategy( );
     }
@@ -102,6 +118,11 @@ public class GameModelProxy implements IGameModel {
     @Override
     public void toggleShootingMode( ) {
         this.subject.toggleShootingMode( );
+    }
+
+    @Override
+    public Position getGameInfoPosition() {
+        return this.subject.getGameInfoPosition();
     }
 
     @Override

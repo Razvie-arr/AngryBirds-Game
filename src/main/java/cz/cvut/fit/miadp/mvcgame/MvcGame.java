@@ -10,8 +10,6 @@ import cz.cvut.fit.miadp.mvcgame.model.GameModel;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.proxy.GameModelProxy;
 import cz.cvut.fit.miadp.mvcgame.view.GameView;
-// in future, use Bridge to remove this dependency
-import javafx.scene.canvas.GraphicsContext;
 
 public class MvcGame {
 
