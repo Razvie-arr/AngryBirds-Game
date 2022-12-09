@@ -3,6 +3,7 @@ package cz.cvut.fit.miadp.mvcgame.proxy;
 import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
@@ -94,6 +95,9 @@ public class GameModelProxy implements IGameModel {
     public List<AbsMissile> getMissiles( ) {
         return this.subject.getMissiles( );
     }
+
+    @Override
+    public List<AbsEnemy> getEnemies() { return this.subject.getEnemies(); }
 
     @Override
     public List<GameObject> getGameObjects( ) {

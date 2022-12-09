@@ -7,13 +7,12 @@ import java.util.Stack;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjectFactory_A;
+import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjectFactory_B;
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsGameInfo;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.*;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Enemy_A;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
@@ -25,8 +24,10 @@ public class GameModel implements IGameModel {
 
     private AbsCannon cannon;
     private List<AbsMissile> missiles;
+    private List<AbsEnemy> enemies;
     private List<IObserver> observers;
-    private IGameObjectFactory goFact;
+    private IGameObjectFactory goFact_A;
+    private IGameObjectFactory goFact_B;
     private IMovingStrategy movingStrategy;
     private AbsGameInfo gameInfo;
 
@@ -37,14 +38,25 @@ public class GameModel implements IGameModel {
 
     public GameModel( ) {
         this.observers = new ArrayList<IObserver>( );
-        this.goFact = new GameObjectFactory_A( this );
-        this.cannon = this.goFact.createCannon( );
-        this.gameInfo = this.goFact.createGameInfo();
+        this.goFact_A = new GameObjectFactory_A( this );
+        this.goFact_B = new GameObjectFactory_B(this);
+        this.cannon = this.goFact_A.createCannon( );
+        this.gameInfo = this.goFact_A.createGameInfo();
         this.missiles = new ArrayList<AbsMissile>();
+        this.enemies = this.createEnemies();
         this.movingStrategy = new SimpleMovingStrategy( );   
         this.score = 0;
         this.unexecutedCmds = new LinkedBlockingDeque<>();
         this.executedCmds = new Stack<>();
+    }
+
+    private List<AbsEnemy> createEnemies() {
+        List<AbsEnemy> enemies = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            enemies.add(this.goFact_A.createEnemy());
+            enemies.add(this.goFact_B.createEnemy());
+        }
+        return enemies;
     }
 
     public void update( ) {
@@ -152,11 +164,14 @@ public class GameModel implements IGameModel {
         return this.missiles;
     }
 
+    public List<AbsEnemy> getEnemies() { return this.enemies; }
+
     public List<GameObject> getGameObjects( ) {
         List<GameObject> go = new ArrayList<GameObject>();
         go.add( this.cannon );
         go.add(this.gameInfo);
         go.addAll( this.missiles );
+        go.addAll(this.enemies);
         return go;
     }
 

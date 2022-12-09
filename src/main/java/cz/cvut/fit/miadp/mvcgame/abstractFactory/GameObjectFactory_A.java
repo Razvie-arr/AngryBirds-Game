@@ -1,13 +1,16 @@
 package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
-import cz.cvut.fit.miadp.mvcgame.model.GameModel;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsGameInfo;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Cannon_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Enemy_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.GameInfo_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Missile_A;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameObjectFactory_A implements IGameObjectFactory {
 
@@ -32,5 +35,8 @@ public class GameObjectFactory_A implements IGameObjectFactory {
         return new GameInfo_A(new Position(MvcGameConfig.GAMEINFO_POS_X, MvcGameConfig.GAMEINFO_POS_Y), model);
     }
 
-
+    @Override
+    public Enemy_A createEnemy() {
+        return new Enemy_A(MvcGameConfig.createEnemyPosition());
+    }
 }

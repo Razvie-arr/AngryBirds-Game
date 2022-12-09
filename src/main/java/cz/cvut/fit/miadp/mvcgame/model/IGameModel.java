@@ -1,6 +1,7 @@
 package cz.cvut.fit.miadp.mvcgame.model;
 
 import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;
 import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
@@ -23,6 +24,7 @@ public interface IGameModel extends IObservable {
     public double getCannonAimAngle();
     public int getCannonPower();
     public List<AbsMissile> getMissiles( );
+    public List<AbsEnemy> getEnemies();
     public List<GameObject> getGameObjects( );
     public IMovingStrategy getMovingStrategy( );
     public IShootingMode getShootingMode();
