@@ -119,6 +119,11 @@ public class Cannon_A extends AbsCannon {
     }
 
     @Override
+    public void setMissileCounter(int missileCounter) {
+        this.missileCounter = missileCounter;
+    }
+
+    @Override
     public IShootingMode getShootingMode() {
         return shootingMode;
     }

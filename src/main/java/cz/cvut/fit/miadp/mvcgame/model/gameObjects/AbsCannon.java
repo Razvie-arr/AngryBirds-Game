@@ -43,6 +43,8 @@ public abstract class AbsCannon extends GameObject {
 
     abstract public int getMissileCounter();
 
+    abstract public void setMissileCounter(int missileCounter);
+
     public void toggleShootingMode( ) {
         if( this.shootingMode instanceof SingleShootingMode ){
             this.shootingMode = DOUBLE_SHOOTING_MODE;

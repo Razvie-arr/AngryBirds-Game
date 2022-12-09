@@ -215,6 +215,10 @@ public class GameModel implements IGameModel {
         this.cannon.decrementMissileCounter();
     }
 
+    private void setMissileCounter(int missileCounter) {
+        this.cannon.setMissileCounter(missileCounter);
+    }
+
     @Override
     public int getMissileCounter() { return this.cannon.getMissileCounter(); }
 
@@ -230,7 +234,7 @@ public class GameModel implements IGameModel {
         private double angle;
         private IMovingStrategy movingStrategy;
         private IShootingMode shootingMode;
-        // GO positions
+        private int missileCounter;
     }
 
     public Object createMemento( ) {
@@ -241,6 +245,7 @@ public class GameModel implements IGameModel {
         m.angle = this.getCannonAimAngle();
         m.movingStrategy = this.getMovingStrategy();
         m.shootingMode = this.getShootingMode();
+        m.missileCounter = this.getMissileCounter();
         return m;
     }
 
@@ -252,6 +257,7 @@ public class GameModel implements IGameModel {
         this.cannon.setAngle(m.angle);
         this.setMovingStrategy(m.movingStrategy);
         this.setShootingMode(m.shootingMode);
+        this.setMissileCounter(m.missileCounter);
     }
 
     @Override
