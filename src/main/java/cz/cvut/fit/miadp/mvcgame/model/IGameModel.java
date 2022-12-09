@@ -30,6 +30,9 @@ public interface IGameModel extends IObservable {
     public IShootingMode getShootingMode();
     public void toggleMovingStrategy( );
     public void toggleShootingMode( );
+    public void incrementMissileCounter();
+    public void decrementMissileCounter( );
+    public int getMissileCounter();
     public Object createMemento( );
     public void setMemento( Object memento );
 

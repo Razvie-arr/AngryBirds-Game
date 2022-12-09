@@ -11,6 +11,8 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 
+import static cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig.INIT_ANGLE;
+
 public class Cannon_A extends AbsCannon {
 
     private IGameObjectFactory goFact;
@@ -25,7 +27,8 @@ public class Cannon_A extends AbsCannon {
         this.power = MvcGameConfig.INIT_POWER;
         this.angle = MvcGameConfig.INIT_ANGLE;
         this.shootingMode = AbsCannon.SINGLE_SHOOTING_MODE;
-        this.shootingBatch = new ArrayList<AbsMissile>();
+        this.shootingBatch = new ArrayList<>();
+        this.missileCounter = 1;
     }
 
     public void moveUp( ) {
@@ -44,6 +47,11 @@ public class Cannon_A extends AbsCannon {
     @Override
     public void setAngle(double angle) {
         this.angle = angle;
+    }
+
+    @Override
+    public void backToInitialAngle( ) {
+        this.angle = INIT_ANGLE;
     }
 
     @Override
@@ -89,6 +97,25 @@ public class Cannon_A extends AbsCannon {
                 this.power
             )
         );        
+    }
+
+    @Override
+    public void incrementMissileCounter() {
+        if (this.shootingMode == DYNAMIC_SHOOTING_MODE) {
+            this.missileCounter++;
+        }
+    }
+
+    @Override
+    public void decrementMissileCounter() {
+        if (this.shootingMode == DYNAMIC_SHOOTING_MODE && this.missileCounter > 0) {
+            this.missileCounter--;
+        }
+    }
+
+    @Override
+    public int getMissileCounter() {
+        return this.missileCounter;
     }
 
     @Override

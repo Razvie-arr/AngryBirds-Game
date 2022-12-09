@@ -17,5 +17,10 @@ public class UltraSpeedMovingStrategy implements IMovingStrategy {
         missile.move( new Vector( dX, dY ) );
 
     }
-    
+
+    @Override
+    public String getName() {
+        return "UltraSpeedMovingStrategy";
+    }
+
 }

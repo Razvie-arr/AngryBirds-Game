@@ -125,6 +125,19 @@ public class GameModelProxy implements IGameModel {
     }
 
     @Override
+    public void incrementMissileCounter() {
+        this.subject.incrementMissileCounter();
+    }
+
+    @Override
+    public void decrementMissileCounter() {
+        this.subject.decrementMissileCounter();
+    }
+
+    @Override
+    public int getMissileCounter() { return this.subject.getMissileCounter(); }
+
+    @Override
     public Position getGameInfoPosition() {
         return this.subject.getGameInfoPosition();
     }

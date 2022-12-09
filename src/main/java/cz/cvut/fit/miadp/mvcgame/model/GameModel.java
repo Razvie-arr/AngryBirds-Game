@@ -19,6 +19,7 @@ import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.RealisticMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
+import cz.cvut.fit.miadp.mvcgame.strategy.UltraSpeedMovingStrategy;
 
 public class GameModel implements IGameModel {
 
@@ -188,7 +189,10 @@ public class GameModel implements IGameModel {
             this.movingStrategy = new RealisticMovingStrategy( );
         }
         else if ( this.movingStrategy instanceof RealisticMovingStrategy ){
-            this.movingStrategy = new SimpleMovingStrategy( );
+            this.movingStrategy = new UltraSpeedMovingStrategy( );
+        }
+        else {
+            this.movingStrategy = new SimpleMovingStrategy();
         }
     }
 
@@ -200,6 +204,19 @@ public class GameModel implements IGameModel {
     public void toggleShootingMode( ){
         this.cannon.toggleShootingMode( );
     }
+
+    @Override
+    public void incrementMissileCounter() {
+        this.cannon.incrementMissileCounter();
+    }
+
+    @Override
+    public void decrementMissileCounter() {
+        this.cannon.decrementMissileCounter();
+    }
+
+    @Override
+    public int getMissileCounter() { return this.cannon.getMissileCounter(); }
 
     public Position getGameInfoPosition() {
         return this.gameInfo.getPosition();
