@@ -5,6 +5,7 @@ import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsGameInfo;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.miadp.mvcgame.singleton.Theme;
 
 public class GameRenderer implements IVisitor {
 
@@ -22,7 +23,7 @@ public class GameRenderer implements IVisitor {
 
     @Override
     public void visitMissile(AbsMissile missile) {
-        this.gr.drawImage( "images/missile.png" , missile.getPosition());
+        this.gr.drawImage("images/missile_" + Theme.getInstance().theme + ".png",  missile.getPosition());
         
     }
 
@@ -33,7 +34,7 @@ public class GameRenderer implements IVisitor {
 
     @Override
     public void visitEnemy(AbsEnemy enemy) {
-        this.gr.drawImage( "images/" + enemy.getType() + "_" + enemy.getLifeCounter() + ".png" , enemy.getPosition());
+            this.gr.drawImage( "images/" + enemy.getType() + "_" + enemy.getLifeCounter() + ".png" , enemy.getPosition());
     }
 
 }

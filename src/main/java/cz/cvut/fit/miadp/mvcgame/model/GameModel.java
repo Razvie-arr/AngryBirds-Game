@@ -7,16 +7,14 @@ import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
+import cz.cvut.fit.miadp.mvcgame.singleton.Theme;
 import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.RealisticMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.UltraSpeedMovingStrategy;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class GameModel implements IGameModel {
@@ -221,6 +219,15 @@ public class GameModel implements IGameModel {
         }
     }
 
+    public void toggleTheme() {
+        Theme theme = Theme.getInstance();
+        if (Objects.equals(theme.theme, "classic")) {
+            theme.setTheme("star-wars");
+        } else {
+            theme.setTheme("classic");
+        }
+    }
+
     @Override
     public IShootingMode getShootingMode() { return this.cannon.getShootingMode(); }
 
@@ -260,6 +267,7 @@ public class GameModel implements IGameModel {
         private IMovingStrategy movingStrategy;
         private IShootingMode shootingMode;
         private int missileCounter;
+        private String theme;
     }
 
     public Object createMemento( ) {
@@ -271,6 +279,7 @@ public class GameModel implements IGameModel {
         m.movingStrategy = this.getMovingStrategy();
         m.shootingMode = this.getShootingMode();
         m.missileCounter = this.getMissileCounter();
+        m.theme = Theme.getInstance().theme;
         return m;
     }
 
@@ -283,6 +292,7 @@ public class GameModel implements IGameModel {
         this.setMovingStrategy(m.movingStrategy);
         this.setShootingMode(m.shootingMode);
         this.setMissileCounter(m.missileCounter);
+        Theme.getInstance().setTheme(m.theme);
     }
 
     @Override

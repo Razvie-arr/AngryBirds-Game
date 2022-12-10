@@ -51,6 +51,8 @@ public class GameController {
                 case "Z":
                     this.model.registerCommand(new DecrementMissileCounterCmd(this.model));
                     break;
+                case "T":
+                    this.model.registerCommand(new ToggleThemeCmd(this.model));
                 case "B":
                     this.model.undoLastCommand();
                     break;

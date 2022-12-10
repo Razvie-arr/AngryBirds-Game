@@ -125,6 +125,11 @@ public class GameModelProxy implements IGameModel {
     }
 
     @Override
+    public void toggleTheme() {
+        this.subject.toggleTheme();
+    }
+
+    @Override
     public void incrementMissileCounter() {
         this.subject.incrementMissileCounter();
     }

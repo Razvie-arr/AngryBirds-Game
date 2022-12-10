@@ -29,5 +29,4 @@ public abstract class AbsMissile extends LifetimeLimitedGameObject {
     }
 
     public abstract void move( );
-    
 }
