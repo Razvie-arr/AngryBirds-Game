@@ -1,25 +1,23 @@
 package cz.cvut.fit.miadp.mvcgame.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
-import java.util.concurrent.LinkedBlockingDeque;
-
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjectFactory_A;
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjectFactory_B;
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.*;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Enemy_A;
-import cz.cvut.fit.miadp.mvcgame.observer.IObservable;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
 import cz.cvut.fit.miadp.mvcgame.strategy.IMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.RealisticMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.SimpleMovingStrategy;
 import cz.cvut.fit.miadp.mvcgame.strategy.UltraSpeedMovingStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class GameModel implements IGameModel {
 
@@ -76,6 +74,7 @@ public class GameModel implements IGameModel {
     private void moveMissiles( ) {
         for ( AbsMissile missile : this.missiles ) {
             missile.move(  );
+            decrementEnemiesLifeCounter(missile);
         }
         this.destroyMissiles( );
         this.notifyObservers( );
@@ -89,6 +88,31 @@ public class GameModel implements IGameModel {
             }
         }
         this.missiles.removeAll(missilesToRemove);
+    }
+
+    private void decrementEnemiesLifeCounter(AbsMissile missile) {
+        List<AbsEnemy> enemiesToDecrement = new ArrayList<>();
+
+        for (AbsEnemy enemy : this.enemies) {
+            int missileX = missile.getPosition().getX();
+            int missileY = missile.getPosition().getY();
+
+            if (missileY >= enemy.getPosition().getY() - 20 && missileY <= enemy.getPosition().getY() + 20) {
+                if (missileX >= enemy.getPosition().getX() - 20 && missileX <= enemy.getPosition().getX() + 20) {
+                    enemiesToDecrement.add(enemy);
+                }
+            }
+        }
+
+        for (AbsEnemy enemy : enemiesToDecrement) {
+            if (enemy.getLifeCounter() == 1) {
+                this.enemies.remove(enemy);
+            } else {
+                enemy.decrementLifeCounter();
+            }
+        }
+
+        this.notifyObservers();
     }
 
     public Position getCannonPosition( ) {

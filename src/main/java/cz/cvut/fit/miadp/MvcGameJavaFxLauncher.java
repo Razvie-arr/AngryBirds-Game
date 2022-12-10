@@ -3,19 +3,19 @@ package cz.cvut.fit.miadp;
 import cz.cvut.fit.miadp.mvcgame.Bridge.GameGraphics;
 import cz.cvut.fit.miadp.mvcgame.Bridge.IGameGraphics;
 import cz.cvut.fit.miadp.mvcgame.Bridge.JavaFxGraphics;
+import cz.cvut.fit.miadp.mvcgame.MvcGame;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-
-import cz.cvut.fit.miadp.mvcgame.MvcGame;
 
 public class MvcGameJavaFxLauncher extends Application {
 
@@ -32,9 +32,17 @@ public class MvcGameJavaFxLauncher extends Application {
         int winWidth = theMvcGame.getWindowWidth( );
         int winHeigth = theMvcGame.getWindowHeight( );
         stage.setTitle( winTitle );
-        Group root = new Group( );
-        Scene theScene = new Scene( root );
-        stage.setScene( theScene );
+        StackPane root = new StackPane();
+        Scene theScene = new Scene(root);
+        Image img = new Image(this.getClass().getResource("/images/back.jpg").toString());
+        BackgroundImage bImg = new BackgroundImage(img,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        Background bGround = new Background(bImg);
+        root.setBackground(bGround);
+        stage.setScene(theScene);
 
         Canvas canvas = new Canvas( winWidth, winHeigth );
         root.getChildren( ).add( canvas );

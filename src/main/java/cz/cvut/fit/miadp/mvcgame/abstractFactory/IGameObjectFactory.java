@@ -14,4 +14,5 @@ public interface IGameObjectFactory {
     public AbsMissile createMissile( Position cannonPosition, double initAngle, int initVelocity );
     public AbsGameInfo createGameInfo();
     public AbsEnemy createEnemy();
+    public AbsEnemy createEnemy_Test();
 }

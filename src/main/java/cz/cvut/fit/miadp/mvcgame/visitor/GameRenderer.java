@@ -1,7 +1,6 @@
 package cz.cvut.fit.miadp.mvcgame.visitor;
 
 import cz.cvut.fit.miadp.mvcgame.Bridge.IGameGraphics;
-import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsGameInfo;
@@ -34,7 +33,7 @@ public class GameRenderer implements IVisitor {
 
     @Override
     public void visitEnemy(AbsEnemy enemy) {
-        this.gr.drawImage( "images/" + enemy.getType() + ".png" , enemy.getPosition());
+        this.gr.drawImage( "images/" + enemy.getType() + "_" + enemy.getLifeCounter() + ".png" , enemy.getPosition());
     }
 
 }

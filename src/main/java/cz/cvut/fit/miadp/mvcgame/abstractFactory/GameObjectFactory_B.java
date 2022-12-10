@@ -36,4 +36,8 @@ public class GameObjectFactory_B implements IGameObjectFactory{
     public AbsEnemy createEnemy() {
         return new Enemy_B(MvcGameConfig.createEnemyPosition());
     }
+    public AbsEnemy createEnemy_Test() {
+//        return new Enemy_B(MvcGameConfig.createEnemyPosition());
+        return null;
+    }
 }

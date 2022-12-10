@@ -39,4 +39,9 @@ public class GameObjectFactory_A implements IGameObjectFactory {
     public Enemy_A createEnemy() {
         return new Enemy_A(MvcGameConfig.createEnemyPosition());
     }
+
+    @Override
+    public Enemy_A createEnemy_Test() {
+        return new Enemy_A(new Position(500, 360));
+    }
 }
