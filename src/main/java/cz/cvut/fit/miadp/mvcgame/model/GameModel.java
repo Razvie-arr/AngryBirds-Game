@@ -100,6 +100,7 @@ public class GameModel implements IGameModel {
             if (missileY >= enemy.getPosition().getY() - 20 && missileY <= enemy.getPosition().getY() + 20) {
                 if (missileX >= enemy.getPosition().getX() - 20 && missileX <= enemy.getPosition().getX() + 20) {
                     enemiesToDecrement.add(enemy);
+                    this.missiles.remove(missile);
                 }
             }
         }
