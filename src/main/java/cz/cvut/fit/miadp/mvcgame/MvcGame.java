@@ -9,6 +9,7 @@ import cz.cvut.fit.miadp.mvcgame.memento.CareTaker;
 import cz.cvut.fit.miadp.mvcgame.model.GameModel;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.proxy.GameModelProxy;
+import cz.cvut.fit.miadp.mvcgame.singleton.Theme;
 import cz.cvut.fit.miadp.mvcgame.view.GameView;
 
 public class MvcGame {
@@ -18,6 +19,7 @@ public class MvcGame {
     private GameController controller;
 
     public void init( ) {
+        Theme.getInstance().theme = "classic";
         this.model = new GameModelProxy(new GameModel() );
         this.view = new GameView( model );
         this.controller = this.view.getController( );

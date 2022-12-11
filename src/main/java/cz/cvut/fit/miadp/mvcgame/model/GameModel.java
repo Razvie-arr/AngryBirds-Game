@@ -49,7 +49,7 @@ public class GameModel implements IGameModel {
 
     private List<AbsEnemy> createEnemies() {
         List<AbsEnemy> enemies = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             enemies.add(this.goFact_A.createEnemy());
             enemies.add(this.goFact_B.createEnemy());
         }
@@ -220,11 +220,10 @@ public class GameModel implements IGameModel {
     }
 
     public void toggleTheme() {
-        Theme theme = Theme.getInstance();
-        if (Objects.equals(theme.theme, "classic")) {
-            theme.setTheme("star-wars");
+        if (Theme.getInstance().theme.equals("classic")) {
+             Theme.getInstance().theme = "star-wars";
         } else {
-            theme.setTheme("classic");
+            Theme.getInstance().theme = "classic";
         }
     }
 
@@ -292,7 +291,7 @@ public class GameModel implements IGameModel {
         this.setMovingStrategy(m.movingStrategy);
         this.setShootingMode(m.shootingMode);
         this.setMissileCounter(m.missileCounter);
-        Theme.getInstance().setTheme(m.theme);
+        Theme.getInstance().theme = m.theme;
     }
 
     @Override

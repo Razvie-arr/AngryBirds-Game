@@ -34,7 +34,7 @@ public class GameRenderer implements IVisitor {
 
     @Override
     public void visitEnemy(AbsEnemy enemy) {
-            this.gr.drawImage( "images/" + enemy.getType() + "_" + enemy.getLifeCounter() + ".png" , enemy.getPosition());
+            this.gr.drawImage( "images/" + enemy.getType() + "_" + enemy.getLifeCounter() + "_" + Theme.getInstance().theme + ".png" , enemy.getPosition());
     }
 
 }

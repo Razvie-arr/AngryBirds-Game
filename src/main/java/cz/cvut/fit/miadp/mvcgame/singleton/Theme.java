@@ -1,24 +1,19 @@
 package cz.cvut.fit.miadp.mvcgame.singleton;
 
 public class Theme {
-    private static Theme theme_instance = null;
+    //Singleton
+    private static Theme theme_instance;
 
     public String theme;
 
     private Theme() {
-        theme = "classic";
     }
 
-    public static Theme getInstance()
+    public static synchronized Theme getInstance()
     {
         if (theme_instance == null)
             theme_instance = new Theme();
 
         return theme_instance;
     }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
 }
