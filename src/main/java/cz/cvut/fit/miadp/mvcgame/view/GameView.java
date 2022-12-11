@@ -1,6 +1,6 @@
 package cz.cvut.fit.miadp.mvcgame.view;
 
-import cz.cvut.fit.miadp.mvcgame.Bridge.IGameGraphics;
+import cz.cvut.fit.miadp.mvcgame.bridge.IGameGraphics;
 import cz.cvut.fit.miadp.mvcgame.controller.GameController;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.GameObject;

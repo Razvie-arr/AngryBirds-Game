@@ -40,11 +40,13 @@ public class TestCase {
     public void initialGameInfoTest() {
         IGameModel model = new GameModel();
         AbsGameInfo gameInfo = new GameInfo_A(new Position(MvcGameConfig.GAMEINFO_POS_X, MvcGameConfig.GAMEINFO_POS_Y), model);
-        assertEquals("Cannon angle: 0.0°\n" +
-                "Cannon power: 10\n" +
-                "Shooting mode: SingleShootingMode\n" +
-                "Moving strategy: SimpleMovingStrategy\n" +
-                "Active missiles: 0\n", gameInfo.getText());
+        assertEquals("Cannon angle: 0.0°(A and Y)\n" +
+                "Cannon power: 10(D and F)\n" +
+                "Shooting mode: SingleShootingMode(N)\n" +
+                "Moving strategy: SimpleMovingStrategy(M)\n" +
+                "Active missiles: 0\n" +
+                "Active enemies: 10\n" +
+                "Theme: null(T)\n", gameInfo.getText());
     }
 
     @Test
@@ -55,16 +57,16 @@ public class TestCase {
         String previousShootingModeName = model.getShootingMode().getName();
         String previousMovingStrategyName = model.getMovingStrategy().getName();
 
-        assertEquals(Integer.toString(previousCannonPower), getGameInfoParameterFromText(gameInfo.getText(), "Cannon power"));
-        assertEquals(previousShootingModeName, getGameInfoParameterFromText(gameInfo.getText(), "Shooting mode"));
-        assertEquals(previousMovingStrategyName, getGameInfoParameterFromText(gameInfo.getText(), "Moving strategy"));
+        assertEquals(Integer.toString(previousCannonPower) + "(D and F)", getGameInfoParameterFromText(gameInfo.getText(), "Cannon power"));
+        assertEquals(previousShootingModeName + "(N)", getGameInfoParameterFromText(gameInfo.getText(), "Shooting mode"));
+        assertEquals(previousMovingStrategyName + "(M)", getGameInfoParameterFromText(gameInfo.getText(), "Moving strategy"));
 
         model.registerCommand(new CannonPowerUpCmd(model));
         model.registerCommand(new ToggleShootingModeCmd(model));
         model.registerCommand(new ToggleMovingStrategyCmd(model));
         model.update();
 
-        assertEquals(Integer.toString(previousCannonPower + 1), getGameInfoParameterFromText(gameInfo.getText(), "Cannon power"));
+        assertEquals(Integer.toString(previousCannonPower + 1) + "(D and F)", getGameInfoParameterFromText(gameInfo.getText(), "Cannon power"));
         assertNotEquals(previousShootingModeName, getGameInfoParameterFromText(gameInfo.getText(), "Shooting mode"));
         assertNotEquals(previousMovingStrategyName, getGameInfoParameterFromText(gameInfo.getText(), "Moving strategy"));
 

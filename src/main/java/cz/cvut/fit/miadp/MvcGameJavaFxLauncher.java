@@ -1,8 +1,8 @@
 package cz.cvut.fit.miadp;
 
-import cz.cvut.fit.miadp.mvcgame.Bridge.GameGraphics;
-import cz.cvut.fit.miadp.mvcgame.Bridge.IGameGraphics;
-import cz.cvut.fit.miadp.mvcgame.Bridge.JavaFxGraphics;
+import cz.cvut.fit.miadp.mvcgame.bridge.GameGraphics;
+import cz.cvut.fit.miadp.mvcgame.bridge.IGameGraphics;
+import cz.cvut.fit.miadp.mvcgame.bridge.JavaFxGraphics;
 import cz.cvut.fit.miadp.mvcgame.MvcGame;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;

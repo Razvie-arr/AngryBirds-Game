@@ -2,7 +2,7 @@ package cz.cvut.fit.miadp.mvcgame;
 
 import java.util.List;
 
-import cz.cvut.fit.miadp.mvcgame.Bridge.IGameGraphics;
+import cz.cvut.fit.miadp.mvcgame.bridge.IGameGraphics;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.controller.GameController;
 import cz.cvut.fit.miadp.mvcgame.memento.CareTaker;
