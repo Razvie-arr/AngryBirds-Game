@@ -106,6 +106,7 @@ public class GameModel implements IGameModel {
         for (AbsEnemy enemy : enemiesToDecrement) {
             if (enemy.getLifeCounter() == 1) {
                 this.enemies.remove(enemy);
+                this.score++;
             } else {
                 enemy.decrementLifeCounter();
             }
@@ -116,6 +117,11 @@ public class GameModel implements IGameModel {
 
     public Position getCannonPosition( ) {
         return this.cannon.getPosition( );
+    }
+
+    @Override
+    public int getScore() {
+        return this.score;
     }
 
     @Override
@@ -259,7 +265,6 @@ public class GameModel implements IGameModel {
 
 
     private class Memento {
-        private int score;
         private int cannonX;
         private int cannonY;
         private double angle;
@@ -271,7 +276,6 @@ public class GameModel implements IGameModel {
 
     public Object createMemento( ) {
         Memento m = new Memento( );
-        m.score = this.score;
         m.cannonX = this.getCannonPosition().getX();
         m.cannonY = this.getCannonPosition().getY();
         m.angle = this.getCannonAimAngle();
@@ -284,7 +288,6 @@ public class GameModel implements IGameModel {
 
     public void setMemento( Object memento ) {
         Memento m = ( Memento ) memento;
-        this.score = m.score;
         this.cannon.getPosition().setX(m.cannonX);
         this.cannon.getPosition().setY(m.cannonY);
         this.cannon.setAngle(m.angle);

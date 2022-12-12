@@ -40,7 +40,8 @@ public class TestCase {
     public void initialGameInfoTest() {
         IGameModel model = new GameModel();
         AbsGameInfo gameInfo = new GameInfo_A(new Position(MvcGameConfig.GAMEINFO_POS_X, MvcGameConfig.GAMEINFO_POS_Y), model);
-        assertEquals("Cannon angle: 0.0°(A and Y)\n" +
+        assertEquals("Score: 0\n" +
+                "Cannon angle: 0.0°(A and Y)\n" +
                 "Cannon power: 10(D and F)\n" +
                 "Shooting mode: SingleShootingMode(N)\n" +
                 "Moving strategy: SimpleMovingStrategy(M)\n" +

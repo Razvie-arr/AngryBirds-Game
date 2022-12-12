@@ -47,6 +47,11 @@ public class GameModelProxy implements IGameModel {
     }
 
     @Override
+    public int getScore() {
+        return this.subject.getScore();
+    }
+
+    @Override
     public double getCannonAimAngle() {
         return this.subject.getCannonAimAngle();
     }

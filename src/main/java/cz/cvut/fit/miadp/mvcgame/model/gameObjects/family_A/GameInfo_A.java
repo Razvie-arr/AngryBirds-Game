@@ -23,6 +23,7 @@ public class GameInfo_A extends AbsGameInfo {
     @Override
     public String getText() {
         StringBuilder gameInfoText = new StringBuilder();
+        gameInfoText.append("Score: ").append(this.model.getScore()).append("\n");
         gameInfoText.append("Cannon angle: ").append(this.model.getCannonAimAngle()).append("°").append("(A and Y)").append("\n");
         gameInfoText.append("Cannon power: ").append(this.model.getCannonPower()).append("(D and F)").append("\n");
         gameInfoText.append("Shooting mode: ").append(this.model.getShootingMode().getName()).append("(N)").append("\n");

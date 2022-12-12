@@ -21,6 +21,7 @@ public interface IGameModel extends IObservable {
     public void cannonPowerUp( );
     public void cannonPowerDown( );
     public void cannonShoot( );
+    public int getScore();
     public double getCannonAimAngle();
     public int getCannonPower();
     public List<AbsMissile> getMissiles( );
