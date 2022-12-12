@@ -34,6 +34,7 @@ public class GameInfo_A extends AbsGameInfo {
         gameInfoText.append("Active missiles: ").append(this.model.getMissiles().size()).append("\n");
         gameInfoText.append("Active enemies: ").append(this.model.getEnemies().size()).append("\n");
         gameInfoText.append("Theme: ").append(Theme.getInstance().theme).append("(T)").append("\n");
+        gameInfoText.append("Click U for UltraRageShoot");
         return gameInfoText.toString();
     }
 }

@@ -81,7 +81,7 @@ public class GameModel implements IGameModel {
     private void destroyMissiles( ) {
         List<AbsMissile> missilesToRemove = new ArrayList<AbsMissile>();
         for ( AbsMissile missile : this.missiles ) {
-            if( missile.getPosition( ).getX( ) > MvcGameConfig.MAX_X ) {
+            if( missile.getPosition( ).getX( ) > MvcGameConfig.MAX_X || missile.getPosition().getX() < 0 ) {
                 missilesToRemove.add( missile );
             }
         }
@@ -261,6 +261,12 @@ public class GameModel implements IGameModel {
 
     public Position getGameInfoPosition() {
         return this.gameInfo.getPosition();
+    }
+
+    @Override
+    public void cannonUltraRageShoot() {
+        this.missiles.addAll(cannon.ultraRageShoot( )) ;
+        this.notifyObservers();;
     }
 
 

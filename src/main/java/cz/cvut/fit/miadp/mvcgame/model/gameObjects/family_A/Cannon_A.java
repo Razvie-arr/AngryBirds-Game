@@ -56,8 +56,23 @@ public class Cannon_A extends AbsCannon {
 
     @Override
     public List<AbsMissile> shoot( ) {
-        this.shootingBatch.clear( );
-        this.shootingMode.shoot( this );
+        this.shootingBatch.clear();
+        this.shootingMode.shoot(this);
+        return this.shootingBatch;
+    }
+
+    @Override
+    public List<AbsMissile> ultraRageShoot() {
+        this.shootingBatch.clear();
+        this.setAngle(-3.14);
+        for (int i = 0; i < 10; i++) {
+            this.primitiveShoot();
+            this.aimDown();
+            this.aimDown();
+            this.aimDown();
+            this.aimDown();
+        }
+        this.backToInitialAngle();
         return this.shootingBatch;
     }
 

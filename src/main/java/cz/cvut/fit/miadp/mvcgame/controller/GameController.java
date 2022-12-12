@@ -56,6 +56,8 @@ public class GameController {
                 case "B":
                     this.model.undoLastCommand();
                     break;
+                case "U":
+                    this.model.cannonUltraRageShoot();
                 default: 
                     //nothing
             }

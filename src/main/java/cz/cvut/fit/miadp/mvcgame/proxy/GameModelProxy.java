@@ -172,4 +172,9 @@ public class GameModelProxy implements IGameModel {
         this.subject.undoLastCommand();
     }
 
+    @Override
+    public void cannonUltraRageShoot() {
+        this.subject.cannonUltraRageShoot();
+    };
+
 }

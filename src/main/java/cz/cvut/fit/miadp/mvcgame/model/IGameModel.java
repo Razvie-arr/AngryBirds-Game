@@ -37,6 +37,7 @@ public interface IGameModel extends IObservable {
     public int getMissileCounter();
     public Object createMemento( );
     public void setMemento( Object memento );
+    public void cannonUltraRageShoot();
 
     public void registerCommand(AbstractGameCommand cmd);
     public void undoLastCommand();

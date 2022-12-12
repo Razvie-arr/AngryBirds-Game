@@ -30,6 +30,7 @@ public abstract class AbsCannon extends GameObject {
     public abstract void setShootingMode(IShootingMode mode);
     public abstract List<AbsMissile> shoot( );
     public abstract void primitiveShoot( );
+    public abstract List<AbsMissile> ultraRageShoot();
 
 
     @Override

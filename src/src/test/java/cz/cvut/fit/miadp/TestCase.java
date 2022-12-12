@@ -47,7 +47,8 @@ public class TestCase {
                 "Moving strategy: SimpleMovingStrategy(M)\n" +
                 "Active missiles: 0\n" +
                 "Active enemies: 10\n" +
-                "Theme: null(T)\n", gameInfo.getText());
+                "Theme: null(T)\n" +
+                "Click U for UltraRageShoot", gameInfo.getText());
     }
 
     @Test
