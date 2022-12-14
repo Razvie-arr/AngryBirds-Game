@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectFactory;
+import cz.cvut.fit.miadp.mvcgame.builder.IMissileBuilder;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.Vector;
@@ -105,13 +106,13 @@ public class Cannon_A extends AbsCannon {
 
     @Override
     public void primitiveShoot() {
-        this.shootingBatch.add( 
+        this.shootingBatch.add(
             this.goFact.createMissile(
                 new Position( this.getPosition( ).getX( ), this.getPosition( ).getY( ) ),
                 this.angle,
                 this.power
             )
-        );        
+        );
     }
 
     @Override

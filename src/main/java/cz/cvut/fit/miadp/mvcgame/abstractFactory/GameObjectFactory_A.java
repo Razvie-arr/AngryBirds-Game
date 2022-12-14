@@ -1,9 +1,12 @@
 package cz.cvut.fit.miadp.mvcgame.abstractFactory;
 
+import cz.cvut.fit.miadp.mvcgame.builder.IMissileBuilder;
+import cz.cvut.fit.miadp.mvcgame.builder.MissileABuilder;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Cannon_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Enemy_A;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.GameInfo_A;
@@ -26,8 +29,13 @@ public class GameObjectFactory_A implements IGameObjectFactory {
     }
 
     @Override
-    public Missile_A createMissile( Position cannonPosition, double initAngle, int initVelocity ) {
-        return new Missile_A(model.getCannonPosition(), initAngle, initVelocity, this.model.getMovingStrategy( ) );
+    public AbsMissile createMissile(Position cannonPosition, double initAngle, int initVelocity ) {
+        IMissileBuilder builder = new MissileABuilder();
+        builder.setPosition(model.getCannonPosition());
+        builder.setAngle(initAngle);
+        builder.setVelocity(initVelocity);
+        builder.setMovingStrategy(this.model.getMovingStrategy());
+        return builder.getResult();
     }
 
     @Override
