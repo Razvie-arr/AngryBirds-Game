@@ -5,6 +5,8 @@ import cz.cvut.fit.miadp.mvcgame.abstractFactory.GameObjectFactory_B;
 import cz.cvut.fit.miadp.mvcgame.abstractFactory.IGameObjectFactory;
 import cz.cvut.fit.miadp.mvcgame.command.AbstractGameCommand;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
+import cz.cvut.fit.miadp.mvcgame.factory.BossAFactory;
+import cz.cvut.fit.miadp.mvcgame.factory.IBossFactory;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.singleton.Theme;
@@ -27,6 +29,7 @@ public class GameModel implements IGameModel {
     private IGameObjectFactory goFact_B;
     private IMovingStrategy movingStrategy;
     private AbsGameInfo gameInfo;
+    private IBossFactory bossFactory;
 
     private int score;
 
@@ -37,6 +40,7 @@ public class GameModel implements IGameModel {
         this.observers = new ArrayList<IObserver>( );
         this.goFact_A = new GameObjectFactory_A( this );
         this.goFact_B = new GameObjectFactory_B(this);
+        this.bossFactory = new BossAFactory();
         this.cannon = this.goFact_A.createCannon( );
         this.gameInfo = this.goFact_A.createGameInfo();
         this.missiles = new ArrayList<AbsMissile>();
@@ -53,6 +57,7 @@ public class GameModel implements IGameModel {
             enemies.add(this.goFact_A.createEnemy());
             enemies.add(this.goFact_B.createEnemy());
         }
+        enemies.add(this.bossFactory.createBoss());
         return enemies;
     }
 
@@ -81,7 +86,7 @@ public class GameModel implements IGameModel {
     private void destroyMissiles( ) {
         List<AbsMissile> missilesToRemove = new ArrayList<AbsMissile>();
         for ( AbsMissile missile : this.missiles ) {
-            if( missile.getPosition( ).getX( ) > MvcGameConfig.MAX_X || missile.getPosition().getX() < 0 ) {
+            if( missile.getPosition( ).getX( ) > MvcGameConfig.MAX_X || missile.getPosition().getX() < 0 || missile.getPosition().getY() < 0) {
                 missilesToRemove.add( missile );
             }
         }
@@ -95,7 +100,7 @@ public class GameModel implements IGameModel {
             int missileX = missile.getPosition().getX();
             int missileY = missile.getPosition().getY();
 
-            if (missileY >= enemy.getPosition().getY() - 20 && missileY <= enemy.getPosition().getY() + 20) {
+            if (missileY >= enemy.getPosition().getY() - 30 && missileY <= enemy.getPosition().getY() + 20) {
                 if (missileX >= enemy.getPosition().getX() - 20 && missileX <= enemy.getPosition().getX() + 20) {
                     enemiesToDecrement.add(enemy);
                     this.missiles.remove(missile);

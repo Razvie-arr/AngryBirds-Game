@@ -19,8 +19,8 @@ public class MvcGameConfig {
     public static final int GAMEINFO_POS_Y = 20;
 
     public static Position createEnemyPosition() {
-        int enemyPosX = ThreadLocalRandom.current().nextInt(MAX_X / 2, MAX_X);
-        int enemyPosY = ThreadLocalRandom.current().nextInt(10, MAX_Y - 10);
+        int enemyPosX = ThreadLocalRandom.current().nextInt(MAX_X / 2, MAX_X - 50);
+        int enemyPosY = ThreadLocalRandom.current().nextInt(10, MAX_Y - 50);
         return new Position(enemyPosX, enemyPosY);
     }
 }
