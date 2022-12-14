@@ -1,6 +1,7 @@
 package cz.cvut.fit.miadp.mvcgame.config;
 
 import cz.cvut.fit.miadp.mvcgame.model.Position;
+import javafx.geometry.Pos;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -22,5 +23,10 @@ public class MvcGameConfig {
         int enemyPosX = ThreadLocalRandom.current().nextInt(MAX_X / 2, MAX_X - 50);
         int enemyPosY = ThreadLocalRandom.current().nextInt(10, MAX_Y - 50);
         return new Position(enemyPosX, enemyPosY);
+    }
+
+    public static Position createBarrierNearEnemy(Position enemyPosition) {
+        Position barrierPos = new Position(enemyPosition.getX() - 30, enemyPosition.getY());
+        return barrierPos;
     }
 }

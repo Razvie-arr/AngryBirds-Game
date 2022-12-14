@@ -1,9 +1,6 @@
 package cz.cvut.fit.miadp.mvcgame.visitor;
 
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsGameInfo;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.*;
 
 public interface IVisitor {
 
@@ -11,5 +8,6 @@ public interface IVisitor {
     public void visitMissile( AbsMissile missile );
     public void visitGameInfo(AbsGameInfo gameInfo);
     public void visitEnemy(AbsEnemy enemy);
+    public void visitBarrier(AbsBarrier barrier);
     
 }

@@ -8,6 +8,7 @@ import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.factory.BossAFactory;
 import cz.cvut.fit.miadp.mvcgame.factory.IBossFactory;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.*;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Barrier_A;
 import cz.cvut.fit.miadp.mvcgame.observer.IObserver;
 import cz.cvut.fit.miadp.mvcgame.singleton.Theme;
 import cz.cvut.fit.miadp.mvcgame.state.IShootingMode;
@@ -30,7 +31,7 @@ public class GameModel implements IGameModel {
     private IMovingStrategy movingStrategy;
     private AbsGameInfo gameInfo;
     private IBossFactory bossFactory;
-
+    private List<AbsBarrier> barriers;
     private int score;
 
     private Queue<AbstractGameCommand> unexecutedCmds;
@@ -49,6 +50,7 @@ public class GameModel implements IGameModel {
         this.score = 0;
         this.unexecutedCmds = new LinkedBlockingDeque<>();
         this.executedCmds = new Stack<>();
+        this.barriers = this.createBarriers();
     }
 
     private List<AbsEnemy> createEnemies() {
@@ -59,6 +61,15 @@ public class GameModel implements IGameModel {
         }
         enemies.add(this.bossFactory.createBoss());
         return enemies;
+    }
+
+    private List<AbsBarrier> createBarriers() {
+        List<AbsBarrier> barriers = new ArrayList<>();
+        int barriersSize = this.enemies.size() / 5;
+        for (int i = 0; i < barriersSize; i++) {
+            barriers.add(this.goFact_A.createBarrier(enemies.get(i).getPosition()));
+        }
+        return barriers;
     }
 
     public void update( ) {
@@ -77,6 +88,7 @@ public class GameModel implements IGameModel {
     private void moveMissiles( ) {
         for ( AbsMissile missile : this.missiles ) {
             missile.move(  );
+            checkCollisionWithBarrier(missile);
             decrementEnemiesLifeCounter(missile);
         }
         this.destroyMissiles( );
@@ -91,6 +103,18 @@ public class GameModel implements IGameModel {
             }
         }
         this.missiles.removeAll(missilesToRemove);
+    }
+
+    private void checkCollisionWithBarrier(AbsMissile missile) {
+        for (AbsBarrier barrier : this.barriers) {
+            int missileX = missile.getPosition().getX();
+            int missileY = missile.getPosition().getY();
+            if (missileY >= barrier.getPosition().getY() - 30 && missileY <= barrier.getPosition().getY() + 20) {
+                if (missileX >= barrier.getPosition().getX() - 20 && missileX <= barrier.getPosition().getX() + 20) {
+                    this.missiles.remove(missile);
+                }
+            }
+        }
     }
 
     private void decrementEnemiesLifeCounter(AbsMissile missile) {
@@ -207,6 +231,7 @@ public class GameModel implements IGameModel {
         go.add(this.gameInfo);
         go.addAll( this.missiles );
         go.addAll(this.enemies);
+        go.addAll(this.barriers);
         return go;
     }
 

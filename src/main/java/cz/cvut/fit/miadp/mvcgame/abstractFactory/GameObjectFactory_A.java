@@ -5,12 +5,10 @@ import cz.cvut.fit.miadp.mvcgame.builder.MissileABuilder;
 import cz.cvut.fit.miadp.mvcgame.config.MvcGameConfig;
 import cz.cvut.fit.miadp.mvcgame.model.IGameModel;
 import cz.cvut.fit.miadp.mvcgame.model.Position;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsBarrier;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
 import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Cannon_A;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Enemy_A;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.GameInfo_A;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.Missile_A;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.family_A.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,5 +49,10 @@ public class GameObjectFactory_A implements IGameObjectFactory {
     @Override
     public Enemy_A createEnemy_Test() {
         return new Enemy_A(new Position(500, 360));
+    }
+
+    @Override
+    public AbsBarrier createBarrier(Position enemyPosition) {
+        return new Barrier_A(MvcGameConfig.createBarrierNearEnemy(enemyPosition));
     }
 }

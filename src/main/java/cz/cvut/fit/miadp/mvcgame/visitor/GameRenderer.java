@@ -1,10 +1,7 @@
 package cz.cvut.fit.miadp.mvcgame.visitor;
 
 import cz.cvut.fit.miadp.mvcgame.bridge.IGameGraphics;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsCannon;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsEnemy;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsGameInfo;
-import cz.cvut.fit.miadp.mvcgame.model.gameObjects.AbsMissile;
+import cz.cvut.fit.miadp.mvcgame.model.gameObjects.*;
 import cz.cvut.fit.miadp.mvcgame.singleton.Theme;
 
 public class GameRenderer implements IVisitor {
@@ -34,7 +31,12 @@ public class GameRenderer implements IVisitor {
 
     @Override
     public void visitEnemy(AbsEnemy enemy) {
-            this.gr.drawImage( "images/" + enemy.getType() + "_" + enemy.getLifeCounter() + "_" + Theme.getInstance().theme + ".png" , enemy.getPosition());
+        this.gr.drawImage( "images/" + enemy.getType() + "_" + enemy.getLifeCounter() + "_" + Theme.getInstance().theme + ".png" , enemy.getPosition());
+    }
+
+    @Override
+    public void visitBarrier(AbsBarrier barrier) {
+        this.gr.drawImage("images/bound.png", barrier.getPosition());
     }
 
 }
